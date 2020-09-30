@@ -1,0 +1,45 @@
+# set of strings
+variable names_set {
+  type = set(string)
+  default = [
+    "tres",
+    "cuatro",
+    "cinco"
+  ]
+}
+
+module "s3_buckets_set" {
+  source   = "../modules/s3"
+  for_each = var.names_set
+  name     = each.value # acceso a valores de set of strings 
+}
+
+output "s3_bucket_tres_name" {
+  value = module.s3_buckets_set["tres"].s3_bucket # Output para saber el nombre del bucket tres
+}
+
+# map
+variable names_map {
+  type = map
+  default = {
+    seis = {
+      name = "elseis",
+    },
+    siete = {
+      name = "elsiete",
+    },
+    ocho = {
+      name = "elocho",
+    }
+  }
+}
+
+module "s3_buckets_map" {
+  source   = "../modules/s3"
+  for_each = var.names_map
+  name     = "${each.key}-${each.value.name}" # accesos a llave y valores de un map 
+}
+
+output "s3_bucket_ocho_name" {
+  value = module.s3_buckets_map["ocho"].s3_bucket # Output para saber el nombre del bucket ocho
+}
