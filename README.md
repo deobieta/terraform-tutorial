@@ -8,7 +8,7 @@
 * [Ejercicio 1. Intro](https://github.com/deobieta/terraform-tutorial/blob/master/1-intro/README.md)
 * [Ejercicio 2. Variables](https://github.com/deobieta/terraform-tutorial/blob/master/2-variables/README.md)
 * [Ejercicio 3. Módulos](https://github.com/deobieta/terraform-tutorial/blob/master/3-modules/README.md)
-* [Ejercicio 4. Workspaces (pendiente)](https://github.com/deobieta/terraform-tutorial/blob/master/4-workspaces/README.md)
+* [Ejercicio 4. Workspaces](https://github.com/deobieta/terraform-tutorial/blob/master/4-workspaces/README.md)
 * [Ejercicio 5. Remote state (pendiente)](https://github.com/deobieta/terraform-tutorial/blob/master/5-remote-state/README.md)
 
 ## Resumen del tutorial
