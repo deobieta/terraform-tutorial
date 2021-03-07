@@ -30,7 +30,7 @@ Vamos a utilizar nuestro workspace "dev" primero para crear infraestructura, ant
     $ terraform workspace show
     prod
 
-Para cambiar de workspace lo podemos hacer de la siguiente forma.
+Para cambiar de workspace lo podemos hacer de la siguiente forma.On disk
 
     $ terraform workspace select dev
     $ terraform workspace select dev
@@ -116,3 +116,10 @@ El nombre del bucket sale de las mismas partes que los recursos de dev solamente
     Switched to workspace "prod".
 
     $ terraform destroy -var-file=prod.tfvars
+
+
+## Alternativas
+
+Los workspaces de Terraform CLI pueden ser útiles aunque en ciertos casos pueden agregar complejidad conforme el código de infraestructura va creciendo y la configuración de workspaces se lleva dentro del directorio donde corre Terraform. Una alternativa es Terraform cloud abstrae la configuración que vive en los directorios que usa Terraform CLI de forma local y crea workspaces remotos.  Terraform Cloud se encarga de configurar el estado (state) y es necesario crear un link con un servicio de control de versiones como Github o Gitlab. Al tener el workspace fuera de la configuarción del directorio se pueden crear varias versiones de infraestructura utilizando las mismas configuarciones de Terraform de una manera mas sencilla utilizando diferentes ramas del sistema de control de versiones.
+
+FIXME: Poner un link a terragrunt.

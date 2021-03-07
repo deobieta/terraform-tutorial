@@ -81,11 +81,11 @@ Algunas ventjas de tener infraestructura como código (IaC)
 [Instrucciones](https://github.com/deobieta/terraform-tutorial/blob/master/3-modules/README.md)
 
 
-## Workspaces (pendiente)
+## Workspaces 
 
 [Instrucciones](https://github.com/deobieta/terraform-tutorial/blob/master/4-workspaces/README.md)
 
-## Remote state (pendiente)
+## Remote state 
 
 [Instrucciones](https://github.com/deobieta/terraform-tutorial/blob/master/5-remote-state/README.md)
 
