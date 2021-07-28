@@ -7,17 +7,10 @@ Configurar un estado remoto permite que Terraform escriba el archivo  terraform.
 En este ejercicio vamos a configurar el estado remoto utilizando un bucket de AWS S3.
 
 
-    $ cd 5-remote-state/
-    $ terraform init
-    Initializing provider plugins...
-    - Finding latest version of hashicorp/aws...
-    - Finding latest version of hashicorp/random...
-    - Installing hashicorp/aws v3.8.0...
-    - Installed hashicorp/aws v3.8.0 (signed by HashiCorp)
-    - Installing hashicorp/random v2.3.0...
-    - Installed hashicorp/random v2.3.0 (signed by HashiCorp)...
-
-    $ terraform plan
+    cd 5-remote-state/
+    terraform init
+    
+    terraform plan
     Refreshing Terraform state in-memory prior to plan...
     The refreshed state will be used to calculate this plan, but will not be
     persisted to local or remote state storage.
@@ -33,7 +26,7 @@ En este ejercicio vamos a configurar el estado remoto utilizando un bucket de AW
 
     # aws_s3_bucket.remote_state will be created...
 
-    $ terraform apply
+    terraform apply
     ...
 
     Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
@@ -46,7 +39,7 @@ En este ejercicio vamos a configurar el estado remoto utilizando un bucket de AW
 Para configurar el estado remoto mueve el archivo backend.tf.keep > backend.tf. Copia y pega el output remote_state_bucket en el atributo "bucket" en el archivo backend.tf.
 
 
-    $ mv backend.tf.keep backend.tf
+    mv backend.tf.keep backend.tf
     
 Edita backend.tf con cualquier editor de texto.
 
@@ -61,7 +54,7 @@ Edita backend.tf con cualquier editor de texto.
 
 Reinicializa el backend de la configuración de Terraform.
 
-    $ terraform init
+    terraform init
 
     Initializing the backend...
     Do you want to copy existing state to the new backend?
@@ -82,22 +75,9 @@ Reinicializa el backend de la configuración de Terraform.
 
 Para probar que a partir de este momento no vamos a utilizar el estado local podemos borrarlo y crear un plan para asegurarnos que Terraform está usando el estado remoto de S3.
 
-    $ rm terraform.tfstate
-    $ terraform plan
-    Refreshing Terraform state in-memory prior to plan...
-    The refreshed state will be used to calculate this plan, but will not be
-    persisted to local or remote state storage.
+    rm terraform.tfstate
+    terraform plan
 
-    random_id.remote_state: Refreshing state... [id=Mws_xWozZWM]
-    aws_s3_bucket.remote_state: Refreshing state... [id=terraform-tutorial-remote-state-330b3fc56a336563]
-
-    ------------------------------------------------------------------------
-
-    No changes. Infrastructure is up-to-date.
-
-    This means that Terraform did not detect any differences between your
-    configuration and real physical resources that exist. As a result, no
-    actions need to be performed.
 
 Ahora podemos compartir esta configuración con nuestro equipo para todos puedan tener acceso a la última versión del estado remoto.
 

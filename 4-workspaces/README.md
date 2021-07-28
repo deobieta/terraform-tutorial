@@ -6,44 +6,34 @@ Al inicializar un directorio de Terraform lo que realmente está pasando es que 
 
 ## Nuevo workspace 
 
-    $ cd 4-workspaces/
-    $ terraform init
-    $ terraform workspace list
-    * default
+    cd 4-workspaces/
+    terraform init
+    terraform workspace list
 
-    $ terraform workspace new dev 
-    Created and switched to workspace "dev"!
+    terraform workspace new dev 
 
-    $ terraform workspace new prod
-    Created and switched to workspace "prod"!
+    terraform workspace new prod
 
-    $ terraform workspace list
-    default
-    dev
-    * prod
+    terraform workspace list
 
 
 ## Diferentes ambientes y mismas configuraciones
 
 Vamos a utilizar nuestro workspace "dev" primero para crear infraestructura, antes que nada debemos saber qué workspace estamos usando actualmente.
 
-    $ terraform workspace show
-    prod
+    terraform workspace show
 
 Para cambiar de workspace lo podemos hacer de la siguiente forma.On disk
 
-    $ terraform workspace select dev
-    $ terraform workspace select dev
-    Switched to workspace "dev".
+    terraform workspace select dev
 
 
 En este ejercicio vamos a ver cómo pasar un archivo de variables al "plan" y "apply" de tal forma que las configuraciones de Terraform no contengan alguna refrencia directa con el workspace en si y la creación de recursos entre workspaces sea transparente.
 
 
     terraform plan -var-file=dev.tfvars
-    Plan: 4 to add, 0 to change, 0 to destroy.
 
-    $ terraform apply -var-file=dev.tfvars
+    terraform apply -var-file=dev.tfvars
     module.s3_bucket_1[0].random_id.this: Creating...
     module.s3_bucket_2.random_id.this: Creating...
     module.s3_bucket_2.random_id.this: Creation complete after 0s [id=v5TAGJPUkqw]
@@ -80,13 +70,11 @@ Digamos que en dev queremos crear dos buckets pero en prod solo uno. Sí corremo
 
 En la linea 4 del archivo main.tf podemos leer la condición. La condición es que el recurso solo se va a crear si el workspace se llama "dev".
 
-    $ terraform workspace select prod
-    Switched to workspace "prod".
+    terraform workspace select prod
     
-    $ terraform plan -var-file=prod.tfvars
-    Plan: 2 to add, 0 to change, 0 to destroy
+    terraform plan -var-file=prod.tfvars
 
-    $ terraform apply -var-file=prod.tfvars
+    terraform apply -var-file=prod.tfvars
     module.s3_bucket_2.random_id.this: Creating...
     module.s3_bucket_2.random_id.this: Creation complete after 0s [id=mJ_kIZDJBq4]
     module.s3_bucket_2.aws_s3_bucket.this: Creating...
@@ -107,15 +95,13 @@ El nombre del bucket sale de las mismas partes que los recursos de dev solamente
 
 ## Limpiar 
 
-    $ terraform workspace select dev
-    Switched to workspace "dev".
+    terraform workspace select dev
 
-    $ terraform destroy -var-file=dev.tfvars
+    terraform destroy -var-file=dev.tfvars
 
-    $ terraform workspace select prod
-    Switched to workspace "prod".
+    terraform workspace select prod
 
-    $ terraform destroy -var-file=prod.tfvars
+    terraform destroy -var-file=prod.tfvars
 
 
 ## Alternativas de workspaces

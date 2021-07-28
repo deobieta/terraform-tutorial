@@ -18,7 +18,7 @@ El tutorial tiene como finalidad hacer una introducción al uso de IaC (Infraest
 Antes de comenzar el tutorial es necesario completar los siguientes pasos:
 
 * [Tener una cuenta en AWS](<https://aws.amazon.com>)
-* [Instalar Terraform >= 0.13](<https://www.terraform.io/downloads.html>)
+* [Instalar Terraform >= 1](<https://www.terraform.io/downloads.html>)
 
 Las herramientas que utilizaremos en el tutorial son:
 
@@ -90,4 +90,4 @@ Algunas ventjas de tener infraestructura como código (IaC)
 [Instrucciones](https://github.com/deobieta/terraform-tutorial/blob/master/5-remote-state/README.md)
 
 
-![user output](/readme-images/mgc.gif)
+

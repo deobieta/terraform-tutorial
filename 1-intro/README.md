@@ -6,24 +6,17 @@ En este ejercicio vamos a crear un bucket de S3 con Terraform. El objetivo del e
 
 El comando ["init"](https://www.terraform.io/docs/commands/init.html) lee las configuraciones presentes en el directorio donde estamos parados actualmente y si encuentra una configuración de Terraform válida, prepará el directorio para ejecutar comandos de Terraform. Entre otras funciones el comando init checa la versión instalada de Terraform y versiones de módulos a usar, inicializa un [backend](https://www.terraform.io/docs/backends/config.html) para guardar el estado (terraform.tfstate) de nuestra infraestructura, instalación de [providers](https://www.terraform.io/docs/providers/index.html) (plugins) definidos en la configuración de Terraform.
 
-    $ cd 1-intro/
-    $ terraform init
-    Initializing provider plugins...
-    - Finding latest version of hashicorp/aws...
-    - Finding latest version of hashicorp/random...
-    - Installing hashicorp/aws v3.8.0...
-    - Installed hashicorp/aws v3.8.0 (signed by HashiCorp)
-    - Installing hashicorp/random v2.3.0...
-    - Installed hashicorp/random v2.3.0 (signed by HashiCorp)
+     cd 1-intro/
+     terraform init
 
 Existen plugins de proveedores de servicios como "hashicorp/aws" o plugins que proveen alguna funcionalidad local como lo hace "hashicorp/random" que se encarga de crear un valor aleatorio que será parte del nombre de un bucket de S3.
 Una vez inicializado nuestro directorio de trabajo podemos ejectuar otros comandos de Terraform.
 
 ## terrafom plan
 
-Antes de crear infraestructura debemos crear un ["plan"](https://www.terraform.io/docs/commands/plan.html), el proceso normal de un plan es ejecutar un ["refresh"](https://www.terraform.io/docs/commands/refresh.html) que es el proceso que reconcilia lo que tenemos en nuestro estado (terraform.tfstate) con el mundo real. Si existe alguna diferencia entre el estado y el mundo real, los cambios se verán reflejados en el plan, de esta forma tenemos opción de analizar que el plan sea realmente el estado deseado.
+Antes de crear infraestructura debemos crear un ["plan"](https://www.terraform.io/docs/commands/plan.html), el proceso normal de un plan es ejecutar un ["refresh"](https://www.terraform.io/docs/commands/refresh.html) que es el proceso que reconcilia el mundo real con nuestro estado de Terraform (terraform.tfstate). Si existe alguna diferencia entre el estado y el mundo real, los cambios se verán reflejados en el plan, de esta forma tenemos opción de analizar que el plan sea realmente el estado deseado.
 
-    $ terraform plan
+    terraform plan
     # aws_s3_bucket.intro will be created
     + resource "aws_s3_bucket" "intro" {
         + acceleration_status         = (known after apply)
@@ -67,7 +60,7 @@ Terraform planea la manera más rápida de crear recursos de forma paralela y re
 
 Un vez generado el plan y este indica los movimientos correctos podemos correr el comando de ["apply"](https://www.terraform.io/docs/commands/apply.html) que es el que se va a encargar de crear o modificar nuestros recursos de acuerdo al plan. 
 
-    $ terraform apply
+    terraform apply
     random_id.intro: Creating...
     random_id.intro: Creation complete after 0s [id=b68rke_OFEY]
     aws_s3_bucket.intro: Creating...
@@ -83,8 +76,8 @@ Si nuestro plan se aplicó de forma exitosa, al correr un nuevo plan no debería
 
 Una buena práctica al crear y aplicar planes es generar un archivo que contenga el plan de ejecución. 
 
-    $ terraform plan -out=miplan
-    $ terraform apply miplan
+    terraform plan -out=miplan
+    terraform apply miplan
 
 
 ### ¿Por qué necesito generar un archivo que contenga mi plan?
@@ -93,4 +86,4 @@ Normalmente la infraestructura es manejada por un equipo de personas que modific
 
 ## Limpiar 
 
-    $ terraform destroy
+    terraform destroy

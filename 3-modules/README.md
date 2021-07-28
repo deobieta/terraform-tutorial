@@ -10,10 +10,10 @@ El concepto de módulo se puede comparar con una función en un lenguaje de prog
 
 Supongamos que nuestro módulo de [S3](https://github.com/deobieta/terraform-tutorial/blob/master/modules/s3-one-level) es una abstracción compleja de nuestra infraestructura. En el archivo [main.tf](https://github.com/deobieta/terraform-tutorial/blob/master/3-modules/main.tf) viene un ejemplo de cómo llamar el mismo modulo múltiples veces para crear esa parte supuestamente "compleja". Esto es útil para reducir codigo, de igual forma reduce la complejidad de uso del código y creación de infraestructura.
 
-    $ cd 3-modules/
-    $ terraform init
-    $ terraform plan
-    $ terraform apply
+    cd 3-modules/
+    terraform init
+    terraform plan
+    terraform apply
 
 Con unas cuantas lineas de código y variables podemos crear arquitecturas complejas y reutilizar el código dentro de un módulo.
 
@@ -22,9 +22,9 @@ Con unas cuantas lineas de código y variables podemos crear arquitecturas compl
 
 Desde Terraform v0.13 podemos usar for_each y count dentro de módulos. Esto facilita aún más la repetición de  infraestructura similar. El archivo "for-each.tf.keep" no es considerado por Terraform ya que no termina con la extensión correcta (.tf). Para el siguienete ejercicio es necesario cambiar el nombre del archivo para que Terraform lo cargue duarnte el plan y apply.
 
-    $ mv for-each.tf.keep for-each.tf
-    $ terraform get # necesario para instalar módulos o también se puede utilizar init
-    $ terraform plan
+    mv for-each.tf.keep for-each.tf
+    terraform get # necesario para instalar módulos o también se puede utilizar init
+    terraform plan
     module.s3_bucket_2.random_id.this: Refreshing state... [id=M-tGPnW9Nro]
     module.s3_bucket_1.random_id.this: Refreshing state... [id=n-hoXp8Dqzg]
     module.s3_bucket_1.aws_s3_bucket.this: Refreshing state... [id=uno-9fe8685e9f03ab38]
@@ -33,7 +33,7 @@ Desde Terraform v0.13 podemos usar for_each y count dentro de módulos. Esto fac
 
     Plan: 12 to add, 0 to change, 0 to destroy.
 
-    $ terraform apply
+    terraform apply
     ...
 
     Apply complete! Resources: 12 added, 0 changed, 0 destroyed.
@@ -58,4 +58,4 @@ El módulo multi nivel en este ejercicio es simplemente un ejemplo normalmente s
 
 ## Limpiar 
 
-    $ terraform destroy
+    terraform destroy
